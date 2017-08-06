@@ -18,19 +18,76 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function() {
+  this.sprite = 'images/char-boy.png';
+  this.x = 202;
+  this.y = 380;
+  this.pass = {
+    x: 101,
+    y: 80
+  };
+};
 
+Player.prototype.update = function() {}
+
+Player.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.moveUp = function() {
+  if (this.y - this.pass.y >= 60) {
+    this.y = this.y - this.pass.y;
+  }
+}
+
+Player.prototype.moveDown = function() {
+  if (this.y + this.pass.y <= 380) {
+    this.y = this.y + this.pass.y;
+  }
+}
+
+Player.prototype.moveRight = function() {
+  if (this.x + this.pass.x <= 404) {
+    this.x = this.x + this.pass.x;
+  }
+}
+
+Player.prototype.moveLeft = function() {
+  if (this.x - this.pass.x >= 0) {
+    this.x = this.x - this.pass.x;
+  }
+}
+
+Player.prototype.handleInput = function(key) {
+  switch (key) {
+    case 'up':
+      this.moveUp();
+      break;
+    case 'down':
+      this.moveDown();
+      break;
+    case 'right':
+      this.moveRight();
+      break;
+    case 'left':
+      this.moveLeft();
+      break;
+  }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+var allEnemies = [];
+allEnemies.push(new Enemy);
 
-
+var player = new Player;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
