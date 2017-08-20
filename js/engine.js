@@ -104,6 +104,7 @@ var Engine = (function(global) {
         if (enemy.y === player.y && enemyPosition >= player.x
           && enemyPosition < player.x + 101 ) {
           player.reset();
+          player.resetScore();
         }
       });
     }

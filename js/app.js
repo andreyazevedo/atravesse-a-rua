@@ -56,6 +56,7 @@ var Player = function() {
     x: 101,
     y: 80
   };
+  this.score = 0;
 };
 
 Player.prototype.update = function() {};
@@ -72,7 +73,20 @@ Player.prototype.reset = function() {
 Player.prototype.moveUp = function() {
   if (this.y - this.pass.y >= 60) {
     this.y = this.y - this.pass.y;
+  } else {
+    this.upScore();
   }
+};
+
+Player.prototype.upScore = function() {
+  this.reset();
+  this.score++;
+  updateScoreboard(this.score);
+};
+
+Player.prototype.resetScore = function() {
+  this.score = 0;
+  updateScoreboard(this.score);
 };
 
 Player.prototype.moveDown = function() {
@@ -110,6 +124,14 @@ Player.prototype.handleInput = function(key) {
   }
 };
 
+// Inicializa e atualiza a interface que exibe a pontuação
+var updateScoreboard = function (score) {
+  var HTMLscore = '<p>Pontos: <span>%data%</span></p>';
+  HTMLscore = HTMLscore.replace('%data%', score);
+
+  document.querySelector('.score').innerHTML = HTMLscore;
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -120,6 +142,7 @@ for (var i = 0; i < 4; i++) {
 }
 
 var player = new Player;
+updateScoreboard(player.score);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
