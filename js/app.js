@@ -70,14 +70,6 @@ Player.prototype.reset = function() {
   this.y = 380;
 };
 
-Player.prototype.moveUp = function() {
-  if (this.y - this.pass.y >= 60) {
-    this.y = this.y - this.pass.y;
-  } else {
-    this.upScore();
-  }
-};
-
 Player.prototype.upScore = function() {
   this.reset();
   this.score++;
@@ -87,6 +79,14 @@ Player.prototype.upScore = function() {
 Player.prototype.resetScore = function() {
   this.score = 0;
   updateScoreboard(this.score);
+};
+
+Player.prototype.moveUp = function() {
+  if (this.y - this.pass.y >= 60) {
+    this.y = this.y - this.pass.y;
+  } else {
+    this.upScore();
+  }
 };
 
 Player.prototype.moveDown = function() {
