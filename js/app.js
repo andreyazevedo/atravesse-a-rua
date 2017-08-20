@@ -58,40 +58,40 @@ var Player = function() {
   };
 };
 
-Player.prototype.update = function() {}
+Player.prototype.update = function() {};
 
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.reset = function() {
   this.x = 202;
   this.y = 380;
-}
+};
 
 Player.prototype.moveUp = function() {
   if (this.y - this.pass.y >= 60) {
     this.y = this.y - this.pass.y;
   }
-}
+};
 
 Player.prototype.moveDown = function() {
   if (this.y + this.pass.y <= 380) {
     this.y = this.y + this.pass.y;
   }
-}
+};
 
 Player.prototype.moveRight = function() {
   if (this.x + this.pass.x <= 404) {
     this.x = this.x + this.pass.x;
   }
-}
+};
 
 Player.prototype.moveLeft = function() {
   if (this.x - this.pass.x >= 0) {
     this.x = this.x - this.pass.x;
   }
-}
+};
 
 Player.prototype.handleInput = function(key) {
   switch (key) {
@@ -108,7 +108,7 @@ Player.prototype.handleInput = function(key) {
       this.moveLeft();
       break;
   }
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
