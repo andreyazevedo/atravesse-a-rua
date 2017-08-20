@@ -64,6 +64,11 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+Player.prototype.reset = function() {
+  this.x = 202;
+  this.y = 380;
+}
+
 Player.prototype.moveUp = function() {
   if (this.y - this.pass.y >= 60) {
     this.y = this.y - this.pass.y;
