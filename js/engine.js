@@ -97,10 +97,17 @@ var Engine = (function(global) {
         player.update();
     }
 
+    /* Essa função checa o posicionamento de todos os inimigos do mapa
+    para comparar com a posição do jogador e encontrar possíveis colisões.
+    */
     function checkCollisions() {
       allEnemies.forEach(function(enemy) {
+        // enemyPosition (+80) leva em conta o tamanho do sprite do inimigo
+        // para que a colisão não seja aplicada antes da proximidade
         var enemyPosition = enemy.x + 80;
 
+        // A ultima comparação do IF garante que inimigos que estejam
+        // posicionados APÓS o jogador não sejam identificados como colisões
         if (enemy.y === player.y && enemyPosition >= player.x
           && enemyPosition < player.x + 101 ) {
           player.reset();

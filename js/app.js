@@ -29,11 +29,15 @@ Enemy.prototype.randomPosition = function() {
   return positions[Math.floor((Math.random()*positions.length))];
 };
 
+// Seleciona aleatoriamente um numero entre as velocidades
+// que os inimigos podem ter
 Enemy.prototype.randomSpeed = function () {
   var speeds = [200, 220, 280];
   return speeds[Math.floor((Math.random()*speeds.length))];
 };
 
+// Atualiza a posição dos inimigos e checa se estão no limite do mapa
+// Caso chegue ao fim do mapa, seu estado é resetado
 Enemy.prototype.walk = function (dt) {
   var speed = this.speed * dt;
 
@@ -65,22 +69,27 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Altera o estado/posicionamento original do jogador
 Player.prototype.reset = function() {
   this.x = 202;
   this.y = 380;
 };
 
+// Aumenta em 01 (um) a pontuação e restaura a posição do jogador
 Player.prototype.upScore = function() {
   this.reset();
   this.score++;
   updateScoreboard(this.score);
 };
 
+// Reseta a pontuação
 Player.prototype.resetScore = function() {
   this.score = 0;
   updateScoreboard(this.score);
 };
 
+// Move o jogador um bloco acima e verifica se atingiu
+// o limite da água, sendo assim chamando a função de pontuação
 Player.prototype.moveUp = function() {
   if (this.y - this.pass.y >= 60) {
     this.y = this.y - this.pass.y;
@@ -89,18 +98,21 @@ Player.prototype.moveUp = function() {
   }
 };
 
+// Move o jogador um bloco abaixo e verifica os limites do mapa
 Player.prototype.moveDown = function() {
   if (this.y + this.pass.y <= 380) {
     this.y = this.y + this.pass.y;
   }
 };
 
+// Move o jogador um bloco à direita e verifica os limites do mapa
 Player.prototype.moveRight = function() {
   if (this.x + this.pass.x <= 404) {
     this.x = this.x + this.pass.x;
   }
 };
 
+// Move o jogador um bloco à esquerda e verifica os limites do mapa
 Player.prototype.moveLeft = function() {
   if (this.x - this.pass.x >= 0) {
     this.x = this.x - this.pass.x;
